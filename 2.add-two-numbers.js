@@ -47,27 +47,19 @@ var addTwoNumbers = function(l1, l2) {
 
     let carry = 0;
     while (a != null || b != null) {
-        let sum = 0;
-        if (a !== null) {
-            sum += a.val;
-            a = a.next;
-        }
-
-        if (b !== null) {
-            sum += b.val;
-            b = b.next;
-        }
-
-        sum += carry;
+        let aVal = a !== null ? a.val : 0;
+        let bVal = b !== null ? b.val : 0;
+        let sum = aVal + bVal + carry;
         curr.next = new ListNode(sum % 10);
         carry = Math.floor(sum / 10);
 
         curr = curr.next;
+
+        if(a != null) a = a.next;
+        if(b != null) b = b.next;
     }
 
     if(carry !== 0) curr.next = new ListNode(carry);
 
     return ret.next;
 };
-
-
