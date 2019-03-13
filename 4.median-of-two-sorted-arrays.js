@@ -43,8 +43,16 @@
  * @return {number}
  */
 var findMedianSortedArrays = function(nums1, nums2) {
-    let ret = nums1.concat(nums2).sort((a, b)=>a-b);
-
+    let ret = [];
+    let len = nums1.length + nums2.length;
+    while(ret.length < len) {
+        ret.push(
+            !nums1.length ? nums2.shift() : 
+                !nums2.length ? nums1.shift() :
+                    nums1[0] < nums2[0] ? nums1.shift() : 
+                        nums2.shift()
+        );
+    }
     if(ret.length % 2 === 0) {
         let start = ret.length/2;
         return (ret[start] + ret[start-1]) /2;
